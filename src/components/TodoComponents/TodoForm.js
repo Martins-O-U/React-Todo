@@ -8,16 +8,33 @@ class TodoForm extends Component {
             newTask : ""
         }
     }
+
+    handleChange = event => {
+        this.setState({ 
+            [event.target.name]: event.target.value
+        });
+    };
+
     handleSubmit = (event)=>{
         event.preventDefault();
-        console.log("I got clicked");
+        this.props.onSubmit({
+            id: Date.now(),
+            text: this.state.text,
+            complete: false  
+        });
+        this.setState({
+            text: ""
+        });
+ 
     }
-
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input type='text' name='todo' placeholder='Enter Task...' />
+                <input type='text' name='text' 
+                    placeholder='Enter Task...' 
+                    value={this.state.text} 
+                    onChange={this.handleChange} />
                 <button >Add New Task</button>
                 <button >Clear task</button>
             </form>
