@@ -34,7 +34,6 @@ class TodoForm extends Component {
                 <input type='text' name='text' placeholder='Enter Task...' 
                     value={this.state.text} onChange={this.handleChange} />
                 <button onClick={this.handleSubmit}>Add New Task</button>
-                <button >Clear task</button>
             </form>
         );
     }
