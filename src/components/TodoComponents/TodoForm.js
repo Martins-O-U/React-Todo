@@ -4,14 +4,12 @@ import React, {Component} from 'react';
 class TodoForm extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            newTask : ""
-        }
+        this.state = {value : "" }
     }
 
     handleChange = event => {
         this.setState({ 
-            [event.target.name]: event.target.value
+            value: event.target.value
         });
     };
 
@@ -19,20 +17,19 @@ class TodoForm extends Component {
         event.preventDefault();
         this.props.onSubmit({
             id: Date.now(),
-            text: this.state.text,
+            text: this.state.value,
             complete: false  
         });
         this.setState({
-            text: ""
+            value: ""
         });
- 
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <input type='text' name='text' placeholder='Enter Task...' 
-                    value={this.state.text} onChange={this.handleChange} />
+                    value={this.state.value} onChange={this.handleChange} />
                 <button onClick={this.handleSubmit}>Add New Task</button>
             </form>
         );

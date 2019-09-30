@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default props => (
-    <div style={{ display: 'flex'}}>
+    <div>
         <div style={{
             textDecoration: props.todo.complete ? "line-through" : ''
         }} 

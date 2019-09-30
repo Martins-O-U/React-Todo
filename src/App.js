@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import Todo from './components/TodoComponents/Todo';
-// import { all } from 'q';
+import "./components/TodoComponents/Todo.css";
 
 
 class App extends Component {
@@ -11,14 +11,14 @@ class App extends Component {
     };
     
     addTodo = todo => {
-      this.setState({
-        todos: [todo, ...this.state.todos]
-      })
+      this.setState(state=>({
+        todos: [todo, ...state.todos]
+      }))
     }
 
     toggleComplete = id =>{
-      this.setState({
-        todos: this.state.todos.map(todo =>{
+      this.setState(state=>({
+        todos: state.todos.map(todo =>{
           if(todo.id ===id){
             return {
              ...todo,
@@ -28,7 +28,7 @@ class App extends Component {
             return todo;
           }
         })
-      })
+      }))
     }
 
     updateTodoToShow =(str)=>{
@@ -37,16 +37,16 @@ class App extends Component {
       })
     }
 
-    handleDeleteTodo = id =>{
-      this.setState({
-        todos:this.state.todos.filter(todo => todo.id !== id)
-      })
-    }
+    // handleDeleteTodo = id =>{
+    //   this.setState(state => ({
+    //     todos:state.todos.filter(todo => todo.id !== id)
+    //   }))
+    // }
 
     clearCompletedTodo = () =>{
-      this.setState({
-        todos:this.state.todos.filter(todo => !todo.complete)
-      })
+      this.setState(state =>({
+        todos:state.todos.filter(todo => !todo.complete)
+      }))
     }
 
 	render() {
@@ -59,22 +59,22 @@ class App extends Component {
       todos = this.state.todos.filter(todo => todo.complete);
     }
 		return (
-			<div>
+			<div className='container'>
 				<h1>Todo App</h1>
         <TodoForm onSubmit={this.addTodo}/>
         {todos.map(todo =>(
           <Todo key={todo.id}
           toggleComplete={()=>this.toggleComplete(todo.id)} 
-          onDelete ={()=>this.handleDeleteTodo(todo.id)}
+          // onDelete ={()=>this.handleDeleteTodo(todo.id)}
           todo={todo} />
         ))}
-        <div>
+        <div className='todo'>
           Todos left: {this.state.todos.filter(todo =>!todo.complete).length}
         </div>
-        <div>
-          <button onClick={()=>this.updateTodoToShow('All')}>All</button>
-          <button onClick={()=>this.updateTodoToShow('Active')}>Active</button>
-          <button onClick={()=>this.updateTodoToShow('Complete')}>Complete</button>
+        <div className='btn'>
+          <button onClick={()=>this.updateTodoToShow('All')}>All Task</button>
+          <button onClick={()=>this.updateTodoToShow('Active')}>Active Task</button>
+          <button onClick={()=>this.updateTodoToShow('Complete')}>Task Completed</button>
         </div>
         {this.state.todos.filter(todo =>todo.complete).length ?(
           <div>
